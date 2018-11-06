@@ -1,0 +1,89 @@
+<html>
+<head>
+  <title>Gerador de cifra de susbustituição</title>
+</head>
+
+<script type="text/javascript" src="redi-esterEgg.js"></script>
+
+<script type="text/javascript">
+function test(){
+  return document.getElementById('frmToDec').value = document.getElementById('frmToCri').value;
+}
+
+//Função usada para encriptar a mensagem
+function encript(text, rotation, box){
+  // Par subustituto para o limite
+  var bound = 0x10000;
+
+  // Forçar a rotação de inteiros, só para segurança
+  rotation = parseInt(rotation) % bound;
+
+  // É melhor retornar se não houver mudanças
+  if(rotation === 0){
+    return document.getElementById(box).value = text;
+  }
+
+  // Criando uma string com os caracteres
+  return document.getElementById(box).value = String.fromCharCode.apply(null,
+      // Transformando a string em codigos de caracteres
+      text.split('').map(function(v) {
+          // Retornando os caracteres + a sua rotação
+          return (v.charCodeAt() + rotation + bound) % bound;
+      })
+  );
+}
+
+</script>
+
+<body>
+  <center>
+    <h1>O gerador "definitivo" de cifras </h1>
+  </center>
+  <br />
+  <center>
+    Usando esse revolucionario projeto de tédio você paderá fazer qualquer variação de uma cifra de susbistituição simples como a cifra de ceasar, Rot 13 e outras.
+  </center>
+  <br />
+  <br />
+  <center>
+    <!--Colocando a caixa de texto de variação -->
+    Primeiro você deve declarar quantos caracteres você deseja deslocar o texto:
+    <br />
+    <input type="text" name="rotation" id="rotation"><br>
+    <br />
+
+    <!--Descrevendo onde o texto vai ser escrito -->
+    <table border="0" cellpadding="15" cellspacing="0">
+        <tr>
+          <td>
+            <form>
+              <center>
+                <b>Texto para encriptar...</b>
+                <br />
+                <textarea rows="10" cols="50" id="frmToCri"></textarea>
+                <br />
+                <input type="button" value="Para encriptar" id="btnToCri" onclick="encript(document.getElementById('frmToCri').value, parseInt(document.getElementById('rotation').value), 'frmToDec')"/>
+              </center>
+            </form>
+          </td>
+
+          <!-- Bem pesado para um espaçamento não? -->
+          <td style="width:50px"></td>
+
+          <td>
+            <form>
+              <center>
+                <b>Texto para desencriptar...</b>
+                <br />
+                <textarea rows="10" cols="50" id="frmToDec"></textarea>
+                <br />
+                <input type="button" value="Para desencrpitar" id="btnToDec" onclick="encript(document.getElementById('frmToDec').value, parseInt(document.getElementById('rotation').value)*-1, 'frmToCri')"/>
+              </center>
+            </form>
+          </td>
+        </tr>
+    </table>
+  </center>
+  <!--Finalizando a mostruosidade que a colocação de caixa de texto foi-->
+</body>
+</html>
