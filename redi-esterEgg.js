@@ -46,7 +46,7 @@ var Konami = function (callback) {
 var easter_egg = new Konami();
 easter_egg.code = function() {
 	alert('Konami code - ALL YOUR BASE ARE BELONG TO US!');
-	var win = window.open('https://www.youtube.com/watch?v=1SxasNmTbpE', '_blank');
+	var win = window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
 	win.focus();
 }
 easter_egg.load();
